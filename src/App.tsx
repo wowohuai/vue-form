@@ -1,6 +1,7 @@
 import { defineComponent, reactive, ref, Ref, watchEffect } from 'vue';
 import MonacoEditor from '@/components/monaco-editor';
 import { createUseStyles } from 'vue-jss';
+// import { Schema } from '../lib/types';
 
 import demos from './demos';
 import SchemaForm from '../lib';
@@ -63,8 +64,8 @@ function toJson(data: unknown) {
   return JSON.stringify(data, null, 2);
 }
 // to-do  需要在lib中导出
-type Schema = unknown;
-type UISchema = unknown;
+type Schema = any;
+type UISchema = any;
 
 export default defineComponent({
   setup() {
@@ -95,6 +96,10 @@ export default defineComponent({
       demo.dataCode = toJson(d.default);
       demo.uiSchemaCode = toJson(d.uiSchema);
     });
+    const handleChange = (v: any) => {
+      demo.data = v;
+      demo.dataCode = toJson(v);
+    };
 
     const handleCodeChange = (
       field: 'schema' | 'data' | 'uiSchema',
@@ -164,7 +169,11 @@ export default defineComponent({
             </div>
             {/* form */}
             <div class={classes.form}>
-              <SchemaForm />
+              <SchemaForm
+                schema={demo.schema}
+                value={demo.data}
+                onChange={handleChange}
+              />
               {/* <SchemaForm
                 schema={demo.schema!}
                 uiSchema={demo.uiSchema!}
