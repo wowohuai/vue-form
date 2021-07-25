@@ -80,3 +80,7 @@ json 的格式
 ### contextRef
 
 > 传入 `vue3` 的 `Ref` 对象, 这个对象上会被挂载 `validte`方法
+
+#### typescript
+
+> 原则上不使用 any 类型, 除非...

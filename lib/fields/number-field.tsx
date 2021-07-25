@@ -3,14 +3,24 @@
   @date: 2021-07-25 15:53:53
   @desc：
 */
-import { defineComponent, PropType } from 'vue';
+import { defineComponent } from 'vue';
+import { FieldPropsDefine } from '../types';
 
 export default defineComponent({
   name: 'NumberField',
-  props: {},
+  props: FieldPropsDefine,
   setup(props) {
     return () => {
-      return <div>NumberField</div>;
+      const { onChange, value } = props;
+      const handleChange = (e: any) => {
+        const num = Number(e.target.value);
+        if (Number.isNaN(num)) {
+          onChange(undefined);
+        } else {
+          onChange(Number(e.target.value));
+        }
+      };
+      return <input type="number" value={value} onInput={handleChange} />;
     };
   }
 });

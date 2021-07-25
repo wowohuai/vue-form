@@ -37,10 +37,10 @@ export const FieldPropsDefine = {
   },
   value: {
     required: true,
-    type: (Object || Number || String || Array) as PropType<any>
+    type: null // value 的类型为any  //https://v3.cn.vuejs.org/guide/typescript-support.html#%E6%B3%A8%E8%A7%A3-props
   },
   onChange: {
-    type: Function as PropType<(v: any) => void>,
+    type: Function as PropType<(v: unknown) => void>,
     required: true
   }
 } as const;

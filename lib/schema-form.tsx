@@ -10,7 +10,8 @@ export default defineComponent({
       required: true
     },
     value: {
-      required: true
+      required: true,
+      type: null
     },
     onChange: {
       type: Function as PropType<(v: unknown) => void>,

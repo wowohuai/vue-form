@@ -11,8 +11,7 @@ export default defineComponent({
   props: FieldPropsDefine,
   setup(props) {
     return () => {
-      const { onChange } = props;
-      const value: any = props.value;
+      const { onChange, value } = props;
       const handleChange = (e: any) => {
         onChange(e.target.value);
       };
