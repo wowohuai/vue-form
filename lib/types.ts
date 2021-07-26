@@ -10,7 +10,7 @@ export enum SchemaTypes {
 type SchemaRef = { $ref: string };
 
 export interface Schema {
-  type: SchemaTypes | string;
+  type?: SchemaTypes | string;
   const?: unknown;
   format?: string;
   default?: unknown;
@@ -22,12 +22,24 @@ export interface Schema {
     [key: string]: string[] | Schema | SchemaRef;
   };
   oneOf?: Schema[];
+  allOf?: Schema[];
+  anyOf?: Schema[];
   // vjsf?:
   required?: string[];
   enum?: unknown[];
   enumKeyValue?: unknown[];
-  additionProperties?: unknown;
+  additionalProperties?: any;
   additionItems?: Schema;
+  $ref?: string;
+  uniqueItems?: unknown;
+
+  minLength?: number;
+  maxLength?: number;
+  minimun?: number;
+  maximum?: number;
+  multipleOf?: number;
+  exclusiveMaximum?: number;
+  exclusiveMinimum?: number;
 }
 
 export const FieldPropsDefine = {
@@ -41,6 +53,10 @@ export const FieldPropsDefine = {
   },
   onChange: {
     type: Function as PropType<(v: unknown) => void>,
+    required: true
+  },
+  rootSchema: {
+    type: Object as PropType<Schema>,
     required: true
   }
 } as const;
