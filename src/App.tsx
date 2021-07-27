@@ -97,6 +97,7 @@ export default defineComponent({
       demo.uiSchemaCode = toJson(d.uiSchema);
     });
     const handleChange = (v: any) => {
+      console.log('form value', v);
       demo.data = v;
       demo.dataCode = toJson(v);
     };

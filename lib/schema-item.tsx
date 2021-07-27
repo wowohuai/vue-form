@@ -4,7 +4,8 @@ import {
   StringField,
   StringSFCField,
   NumberField,
-  ObjectField
+  ObjectField,
+  ArrayField
 } from './fields';
 import { retrieveSchema } from './utils';
 
@@ -17,7 +18,7 @@ export default defineComponent({
       return retrieveSchema(schema, rootSchema, value);
     });
     return () => {
-      const { schema, rootSchema, value } = props;
+      const { schema } = props;
       const retrievedSchemaSchema = retrievedSchemaRef.value;
 
       let Component: any;
@@ -33,6 +34,9 @@ export default defineComponent({
           break;
         case SchemaTypes.OBJECT:
           Component = ObjectField;
+          break;
+        case SchemaTypes.ARRAY:
+          Component = ArrayField;
           break;
         default:
           Component = <div>error</div>;
