@@ -8,6 +8,8 @@ import { FieldPropsDefine } from '../types';
 import { useVJSFContext } from '../context';
 import { Schema } from '../types';
 import { createUseStyles } from 'vue-jss';
+import Select from '../widgets/select';
+import { random } from 'lodash';
 
 const useStyles = createUseStyles({
   container: {
@@ -203,9 +205,24 @@ export default defineComponent({
             </ArrayItemWrapper>
           );
         });
-      }
+      } else {
+        const enumOptions = (schema as any).items.enum;
 
-      return <div>array-field</div>;
+        const options = enumOptions.map((i: unknown) => {
+          return {
+            key: Date.now() + random(100),
+            value: i,
+            label: i
+          };
+        });
+        return (
+          <Select
+            options={options}
+            onChange={props.onChange}
+            value={props.value}
+          />
+        );
+      }
     };
   }
 });

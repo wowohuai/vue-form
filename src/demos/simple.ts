@@ -30,6 +30,13 @@ export default {
       dynamicArray: {
         type: 'array',
         items: { type: 'string' }
+      },
+      optionsArray: {
+        type: 'array',
+        items: {
+          type: 'string',
+          enum: ['a', 'b', 'c']
+        }
       }
     }
   },
