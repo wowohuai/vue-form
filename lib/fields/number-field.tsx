@@ -10,16 +10,14 @@ export default defineComponent({
   name: 'NumberField',
   props: FieldPropsDefine,
   setup(props) {
+    const handleChange = (e: any) => {
+      const num = Number(e.target.value);
+
+      props.onChange(num);
+    };
     return () => {
-      const { onChange, value } = props;
-      const handleChange = (e: any) => {
-        const num = Number(e.target.value);
-        if (Number.isNaN(num)) {
-          onChange(undefined);
-        } else {
-          onChange(Number(e.target.value));
-        }
-      };
+      const { value } = props;
+
       return <input type="number" value={value} onInput={handleChange} />;
     };
   }

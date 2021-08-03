@@ -14,6 +14,7 @@ export default defineComponent({
   setup(props) {
     const context = useVJSFContext();
     const handleObjectFieldChange = (k: string, v: unknown) => {
+      console.log(isObject(props.value), props.value);
       const value = isObject(props.value) ? props.value : {};
       if (v === undefined) {
         delete value[k];
