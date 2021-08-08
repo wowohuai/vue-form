@@ -1,7 +1,7 @@
 import { defineComponent, PropType, provide } from 'vue';
-import { Schema } from './types';
+import { CommonFieldDefine, Schema } from './types';
 import SchemaItem from './schema-item';
-import { SchemaFormContextKey } from './context';
+import { SchemaFormContextKey, Context } from './context';
 
 export default defineComponent({
   name: 'SchemaForm',
@@ -24,9 +24,11 @@ export default defineComponent({
       props.onChange(v);
     };
 
-    provide(SchemaFormContextKey, {
-      SchemaItem
-    } as any);
+    const context: Context = {
+      SchemaItem: SchemaItem as CommonFieldDefine
+    };
+
+    provide(SchemaFormContextKey, context);
 
     return () => {
       const { schema, value } = props;

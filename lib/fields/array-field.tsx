@@ -6,9 +6,10 @@
 import { defineComponent, PropType } from 'vue';
 import { FieldPropsDefine } from '../types';
 import { useVJSFContext } from '../context';
-import { Schema } from '../types';
+import { Schema, SelectWidgetNames } from '../types';
 import { createUseStyles } from 'vue-jss';
-import Select from '../widgets/select';
+// import Select from '../widgets/select';
+import { getWidget } from 'lib/theme';
 import { random } from 'lodash';
 
 const useStyles = createUseStyles({
@@ -117,6 +118,7 @@ export default defineComponent({
   props: FieldPropsDefine,
   setup(props) {
     const context = useVJSFContext();
+    const SelectWidgetRef = getWidget(SelectWidgetNames.SELECT);
 
     const handleArrayItemChange = (v: unknown, idx: number) => {
       const { value } = props;
@@ -159,7 +161,7 @@ export default defineComponent({
     };
 
     return () => {
-      const SchemaItem = context.SchemaItem;
+      const { SchemaItem } = context;
       const { schema, rootSchema, value } = props;
 
       const isMultiType = Array.isArray(schema.items);
@@ -217,7 +219,7 @@ export default defineComponent({
           };
         });
         return (
-          <Select
+          <SelectWidgetRef.value
             options={options}
             onChange={props.onChange}
             value={props.value}

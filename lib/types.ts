@@ -52,7 +52,7 @@ export const FieldPropsDefine = {
     type: null // value 的类型为any  //https://v3.cn.vuejs.org/guide/typescript-support.html#%E6%B3%A8%E8%A7%A3-props
   },
   onChange: {
-    type: Function as PropType<(v: unknown) => void>,
+    type: Function as PropType<(v: any) => void>,
     required: true
   },
   rootSchema: {
@@ -62,3 +62,53 @@ export const FieldPropsDefine = {
 } as const;
 
 export type CommonFieldDefine = DefineComponent<typeof FieldPropsDefine>;
+
+export const CommonWidgetPropsDefine = {
+  value: {
+    type: null
+  },
+  onChange: {
+    type: Function as PropType<(v: any) => void>,
+    required: true
+  }
+} as const;
+
+export const SelectWidgetPropsDefine = {
+  ...CommonWidgetPropsDefine,
+  options: {
+    type: Array as PropType<
+      {
+        key: string;
+        value: any;
+        label: string;
+      }[]
+    >,
+    required: true
+  }
+} as const;
+
+export type CommonWidgetDefine = DefineComponent<
+  typeof CommonWidgetPropsDefine
+>;
+
+export type SelectWidgetDefine = DefineComponent<
+  typeof SelectWidgetPropsDefine
+>;
+
+export enum SelectWidgetNames {
+  SELECT = 'select'
+  // RADIO = 'radio'
+}
+
+export enum CommonWidgetNames {
+  TEXT = 'text',
+  NUMBER = 'number'
+}
+
+export interface Theme {
+  widget: {
+    [SelectWidgetNames.SELECT]: SelectWidgetDefine;
+    [CommonWidgetNames.TEXT]: CommonWidgetDefine;
+    [CommonWidgetNames.NUMBER]: CommonWidgetDefine;
+  };
+}

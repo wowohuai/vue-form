@@ -1,18 +1,18 @@
-import SchemaFrom from 'lib/schema-form';
+// import SchemaFrom from 'lib/schema-form';
 import { mount } from '@vue/test-utils';
 import { NumberField, StringField, ArrayField } from 'lib/fields';
 import { SelectWidget } from 'lib/widgets';
+import TestComponent from './utils/test-component';
 
 describe('array-field', () => {
   it('shuold render multi type', () => {
     let value;
-    const wrapper = mount(SchemaFrom, {
+    const wrapper = mount(TestComponent, {
       props: {
         schema: {
           type: 'array',
           items: [{ type: 'string' }, { type: 'number' }]
         },
-        rootSchema: {},
         value: [],
         onChange: (v: unknown) => {
           value = v;
@@ -31,13 +31,12 @@ describe('array-field', () => {
   it('shuold render single type', () => {
     let value;
 
-    const wrapper = mount(SchemaFrom, {
+    const wrapper = mount(TestComponent, {
       props: {
         schema: {
           type: 'array',
           items: { type: 'string' }
         },
-        rootSchema: {},
         value: ['1', '2'],
         onChange: (v: unknown) => {
           value = v;
@@ -54,13 +53,12 @@ describe('array-field', () => {
 
   it('shuold render select type', () => {
     let value;
-    const wrapper = mount(SchemaFrom, {
+    const wrapper = mount(TestComponent, {
       props: {
         schema: {
           type: 'array',
           items: { type: 'string', enum: ['1', '2'] }
         },
-        rootSchema: {},
         value: value,
         onChange: (v: unknown) => {
           value = v;

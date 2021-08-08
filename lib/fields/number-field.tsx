@@ -4,21 +4,21 @@
   @desc：
 */
 import { defineComponent } from 'vue';
-import { FieldPropsDefine } from '../types';
+import { FieldPropsDefine, CommonWidgetNames } from '../types';
+import { getWidget } from 'lib/theme';
 
 export default defineComponent({
   name: 'NumberField',
   props: FieldPropsDefine,
   setup(props) {
-    const handleChange = (e: any) => {
-      const num = Number(e.target.value);
-
-      props.onChange(num);
+    const NumberWidget = getWidget(CommonWidgetNames.NUMBER);
+    const handleInputChange = (v: number) => {
+      props.onChange(v);
     };
     return () => {
-      const { value } = props;
-
-      return <input type="number" value={value} onInput={handleChange} />;
+      return (
+        <NumberWidget.value value={props.value} onChange={handleInputChange} />
+      );
     };
   }
 });

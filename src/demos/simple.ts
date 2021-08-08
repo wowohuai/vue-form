@@ -3,42 +3,42 @@ export default {
   schema: {
     description: 'A simple form example.',
     type: 'object',
-    required: ['firstName', 'lastName']
-    // properties: {
-    //   firstName: {
-    //     type: 'string',
-    //     default: 'Chuck'
-    //   },
-    //   lastName: {
-    //     type: 'string'
-    //   },
-    //   telephone: {
-    //     type: 'string',
-    //     minLength: 10
-    //   },
-    //   staticArray: {
-    //     type: 'array',
-    //     items: [
-    //       {
-    //         type: 'string'
-    //       },
-    //       {
-    //         type: 'number'
-    //       }
-    //     ]
-    //   },
-    //   dynamicArray: {
-    //     type: 'array',
-    //     items: { type: 'string' }
-    //   },
-    //   optionsArray: {
-    //     type: 'array',
-    //     items: {
-    //       type: 'string',
-    //       enum: ['a', 'b', 'c']
-    //     }
-    //   }
-    // }
+    required: ['firstName', 'lastName'],
+    properties: {
+      firstName: {
+        type: 'string',
+        default: 'Chuck'
+      },
+      lastName: {
+        type: 'string'
+      },
+      telephone: {
+        type: 'string',
+        minLength: 10
+      },
+      staticArray: {
+        type: 'array',
+        items: [
+          {
+            type: 'string'
+          },
+          {
+            type: 'number'
+          }
+        ]
+      },
+      dynamicArray: {
+        type: 'array',
+        items: { type: 'string' }
+      },
+      optionsArray: {
+        type: 'array',
+        items: {
+          type: 'string',
+          enum: ['a', 'b', 'c']
+        }
+      }
+    }
   },
   uiSchema: {
     title: 'A registration form',

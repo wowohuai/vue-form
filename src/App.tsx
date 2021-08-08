@@ -2,9 +2,10 @@ import { defineComponent, reactive, ref, Ref, watchEffect } from 'vue';
 import MonacoEditor from '@/components/monaco-editor';
 import { createUseStyles } from 'vue-jss';
 // import { Schema } from '../lib/types';
+import ThemeDefault from 'lib/theme-default';
 
 import demos from './demos';
-import SchemaForm from '../lib';
+import SchemaForm, { ThemeProvider } from '../lib';
 
 const useStyles = createUseStyles({
   container: {
@@ -170,11 +171,14 @@ export default defineComponent({
             </div>
             {/* form */}
             <div class={classes.form}>
-              <SchemaForm
-                schema={demo.schema}
-                value={demo.data}
-                onChange={handleChange}
-              />
+              <ThemeProvider theme={ThemeDefault}>
+                <SchemaForm
+                  schema={demo.schema}
+                  value={demo.data}
+                  onChange={handleChange}
+                />
+              </ThemeProvider>
+
               {/* <SchemaForm
                 schema={demo.schema!}
                 uiSchema={demo.uiSchema!}

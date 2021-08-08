@@ -93,13 +93,17 @@ json 的格式
 - 次版本号(minor): 当你做了向下兼容的功能性新增
 - 修订号(patch): 当你做了向下兼容的问题修正
 
+#### 主题系统
+
+>
+
 #### jest unit test
 
-1. 查看覆盖率
+1.  查看覆盖率
 
-yarn test:unit --coverage
+    yarn test:unit --coverage
 
-2. 仅运行指定的测试用例
+2.  仅运行指定的测试用例
 
 yarn test:unit -t <name> (匹配的是 Tests)
 
@@ -109,4 +113,4 @@ eg:
 
 #### todo
 
-1. 提高单元测试 fugail
+> 1. 提高单元测试 fugail
