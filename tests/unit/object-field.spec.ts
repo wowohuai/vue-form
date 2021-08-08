@@ -1,9 +1,8 @@
 import SchemaFrom from 'lib/schema-form';
 import { mount } from '@vue/test-utils';
-import { NumberField, ObjectField, StringField } from 'lib/fields';
-import objectField from 'lib/fields/object-field';
+import { NumberField, StringField } from 'lib/fields';
 
-describe('SchemaFrom', () => {
+describe('object-field', () => {
   let wrapper: any;
 
   let value: any = {

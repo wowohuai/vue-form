@@ -54,7 +54,7 @@ const ArrayItemWrapper = defineComponent({
       required: true
     }
   },
-  setup(props, { slots, emit }) {
+  setup(props, { slots }) {
     const classes = useStyles().value;
 
     return () => {
@@ -164,7 +164,7 @@ export default defineComponent({
 
       const isMultiType = Array.isArray(schema.items);
       const isSelect = schema.items && (schema.items as any).enum;
-      // 1. items是数组
+      // 2. items是数组
       if (isMultiType) {
         const items = schema.items as Schema[];
         const arr = Array.isArray(value) ? value : [];
@@ -182,7 +182,7 @@ export default defineComponent({
           );
         });
       } else if (!isSelect) {
-        // 2
+        // 1.
         const arr = Array.isArray(value) ? value : [];
         const items = schema.items as Schema;
 
@@ -206,6 +206,7 @@ export default defineComponent({
           );
         });
       } else {
+        // 3.
         const enumOptions = (schema as any).items.enum;
 
         const options = enumOptions.map((i: unknown) => {
