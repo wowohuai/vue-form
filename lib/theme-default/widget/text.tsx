@@ -5,22 +5,24 @@
 */
 import { defineComponent } from 'vue';
 import { CommonWidgetDefine, CommonWidgetPropsDefine } from '../../types';
+import { withFormItem } from '../form-item';
 
-const TextWidget: CommonWidgetDefine = defineComponent({
-  name: 'Text',
-  props: CommonWidgetPropsDefine,
-  setup(props) {
-    const handleInputChange = (e: any) => {
-      props.onChange(e.target.value);
-      console.log(props.value);
-      e.target.value = props.value;
-    };
-    return () => {
-      return (
-        <input type="text" value={props.value} onInput={handleInputChange} />
-      );
-    };
-  }
-});
+const TextWidget: CommonWidgetDefine = withFormItem(
+  defineComponent({
+    name: 'Text',
+    props: CommonWidgetPropsDefine,
+    setup(props) {
+      const handleInputChange = (e: any) => {
+        props.onChange(e.target.value);
+        e.target.value = props.value;
+      };
+      return () => {
+        return (
+          <input type="text" value={props.value} onInput={handleInputChange} />
+        );
+      };
+    }
+  })
+);
 
 export default TextWidget;

@@ -7,6 +7,8 @@ import ThemeDefault from 'lib/theme-default';
 import demos from './demos';
 import SchemaForm, { ThemeProvider } from '../lib';
 
+const contextRef = ref();
+
 const useStyles = createUseStyles({
   container: {
     display: 'flex',
@@ -78,27 +80,30 @@ export default defineComponent({
       schemaCode: string;
       dataCode: string;
       uiSchemaCode: string;
+      customValidate: ((d: any, e: any) => void) | undefined;
     } = reactive({
       schema: null,
       data: {},
       uiSchema: {},
       schemaCode: '',
       dataCode: '',
-      uiSchemaCode: ''
+      uiSchemaCode: '',
+      customValidate: undefined
     });
 
     watchEffect(() => {
       const index = selectedRef.value;
-      const d = demos[index];
+      const d: any = demos[index];
       demo.schema = d.schema;
       demo.data = d.default;
       demo.uiSchema = d.uiSchema;
       demo.schemaCode = toJson(d.schema);
       demo.dataCode = toJson(d.default);
       demo.uiSchemaCode = toJson(d.uiSchema);
+      console.log(d);
+      demo.customValidate = d.customValidate;
     });
     const handleChange = (v: any) => {
-      console.log('form value', v);
       demo.data = v;
       demo.dataCode = toJson(v);
     };
@@ -119,6 +124,9 @@ export default defineComponent({
     const handleSchemaChange = (v: string) => handleCodeChange('schema', v);
     const handleDataChange = (v: string) => handleCodeChange('data', v);
     const handleUISchemaChange = (v: string) => handleCodeChange('uiSchema', v);
+    const handleValidate = (info: any) => {
+      console.log(info);
+    };
 
     const classesRef = useStyles();
 
@@ -176,16 +184,17 @@ export default defineComponent({
                   schema={demo.schema}
                   value={demo.data}
                   onChange={handleChange}
+                  contextRef={contextRef}
+                  customValidate={demo.customValidate}
                 />
+                <button
+                  onClick={() => {
+                    handleValidate(contextRef.value.doValidate());
+                  }}
+                >
+                  校验
+                </button>
               </ThemeProvider>
-
-              {/* <SchemaForm
-                schema={demo.schema!}
-                uiSchema={demo.uiSchema!}
-                onChange={handleChange}
-                contextRef={methodRef}
-                value={demo.data}
-              /> */}
             </div>
           </div>
         </div>

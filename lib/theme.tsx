@@ -11,13 +11,27 @@ import {
   inject,
   ComputedRef
 } from 'vue';
-import { Theme, SelectWidgetNames, CommonWidgetNames } from './types';
+import {
+  Theme,
+  SelectWidgetNames,
+  CommonWidgetNames,
+  SelectWidgetDefine,
+  CommonWidgetDefine
+} from './types';
 
 const THEME_PROVIDE_KEY = Symbol();
 
 export function getWidget<T extends SelectWidgetNames | CommonWidgetNames>(
   name: T
-) {
+):
+  | never
+  | ComputedRef<
+      {
+        select: SelectWidgetDefine;
+        text: CommonWidgetDefine;
+        number: CommonWidgetDefine;
+      }[T]
+    > {
   const context: ComputedRef<Theme> | undefined =
     inject<ComputedRef<Theme>>(THEME_PROVIDE_KEY);
 

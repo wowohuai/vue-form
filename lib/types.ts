@@ -1,4 +1,5 @@
 import { PropType, DefineComponent } from 'vue';
+import { ErrorSchema } from './validator';
 export enum SchemaTypes {
   'NUMBER' = 'number',
   'INTEGER' = 'integer',
@@ -13,6 +14,7 @@ export interface Schema {
   type?: SchemaTypes | string;
   const?: unknown;
   format?: string;
+  title?: string;
   default?: unknown;
   properties?: {
     [key: string]: Schema | SchemaRef;
@@ -58,6 +60,10 @@ export const FieldPropsDefine = {
   rootSchema: {
     type: Object as PropType<Schema>,
     required: true
+  },
+  errorSchema: {
+    type: Object as PropType<ErrorSchema>,
+    required: true
   }
 } as const;
 
@@ -69,6 +75,13 @@ export const CommonWidgetPropsDefine = {
   },
   onChange: {
     type: Function as PropType<(v: any) => void>,
+    required: true
+  },
+  errors: {
+    type: Array as PropType<string[]>
+  },
+  schema: {
+    type: Object as PropType<Schema>,
     required: true
   }
 } as const;

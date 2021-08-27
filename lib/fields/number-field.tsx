@@ -17,7 +17,12 @@ export default defineComponent({
     };
     return () => {
       return (
-        <NumberWidget.value value={props.value} onChange={handleInputChange} />
+        <NumberWidget.value
+          schema={props.schema}
+          value={props.value}
+          onChange={handleInputChange}
+          errors={props.errorSchema.__errors}
+        />
       );
     };
   }

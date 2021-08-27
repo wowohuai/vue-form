@@ -177,6 +177,7 @@ export default defineComponent({
               schema={s}
               rootSchema={rootSchema}
               value={arr[idx]}
+              errorSchema={props.errorSchema[idx] ?? {}}
               onChange={(v) => {
                 handleArrayItemChange(v, idx);
               }}
@@ -202,6 +203,7 @@ export default defineComponent({
                 rootSchema={rootSchema}
                 value={v}
                 key={idx}
+                errorSchema={props.errorSchema[idx] ?? {}}
                 onChange={(v) => handleArrayItemChange(v, idx)}
               ></SchemaItem>
             </ArrayItemWrapper>
@@ -223,6 +225,8 @@ export default defineComponent({
             options={options}
             onChange={props.onChange}
             value={props.value}
+            schema={props.schema}
+            errors={props.errorSchema.__errors}
           />
         );
       }
