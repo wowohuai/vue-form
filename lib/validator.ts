@@ -66,7 +66,6 @@ function toErrorSchema(errors: TransformedErrorObject[]) {
   return errors.reduce((errorSchema, error) => {
     const { property, message } = error;
     const path = parse(property);
-    console.log(path);
     // remove empty string while property is root path (eg: .level)
     if (path.length && path[0] === '') {
       path.splice(0, 1);
@@ -117,13 +116,13 @@ function mergeObjects(source: any, target: any, concatArrays = false) {
  * @param local
  * @returns
  */
-export default function validateFormData(
+export default async function validateFormData(
   validator: Ajv,
   schema: Schema,
   form: unknown,
   local: Localize,
   customValidate?: (data: any, errors: any) => void
-): ValidatedResult {
+): Promise<ValidatedResult> {
   let validationError = null;
 
   try {
@@ -149,7 +148,7 @@ export default function validateFormData(
     };
   }
   const proxy = createErrorProxy();
-  customValidate(form, proxy);
+  await customValidate(form, proxy);
 
   const newErrorSchema = mergeObjects(errorSchema, proxy, true);
 

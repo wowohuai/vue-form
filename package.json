@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "rimraf dist && yarn build:core && yarn build:theme-default",
-    "build:core": "TYPE=lib vue-cli-service build --target lib --name core/index --no-clean lib/index.ts",
+    "build:core": "TYPE=lib vue-cli-service build --target lib --formats umd-min --name core/index --no-clean lib/index.ts",
     "build:theme-default": "TYPE=lib vue-cli-service build --target lib --name theme-default/index --no-clean lib/theme-default/index.tsx",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"

@@ -80,7 +80,7 @@ export default defineComponent({
       schemaCode: string;
       dataCode: string;
       uiSchemaCode: string;
-      customValidate: ((d: any, e: any) => void) | undefined;
+      customValidate: ((d: any, e: any) => Promise<void>) | undefined;
     } = reactive({
       schema: null,
       data: {},
@@ -124,8 +124,9 @@ export default defineComponent({
     const handleSchemaChange = (v: string) => handleCodeChange('schema', v);
     const handleDataChange = (v: string) => handleCodeChange('data', v);
     const handleUISchemaChange = (v: string) => handleCodeChange('uiSchema', v);
-    const handleValidate = (info: any) => {
-      console.log(info);
+    const handleValidate = () => {
+      // console.log(info);
+      contextRef.value.doValidate().then((res: any) => console.log(res));
     };
 
     const classesRef = useStyles();
@@ -187,13 +188,7 @@ export default defineComponent({
                   contextRef={contextRef}
                   customValidate={demo.customValidate}
                 />
-                <button
-                  onClick={() => {
-                    handleValidate(contextRef.value.doValidate());
-                  }}
-                >
-                  校验
-                </button>
+                <button onClick={handleValidate}>校验</button>
               </ThemeProvider>
             </div>
           </div>

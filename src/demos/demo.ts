@@ -16,11 +16,15 @@ export default {
       }
     }
   },
-  customValidate(data: any, errors: any): void {
-    console.log(data);
-    if (data.pass1 !== data.pass2) {
-      errors.pass2.addError('pass must be same');
-    }
+  async customValidate(data: any, errors: any): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        if (data.pass1 !== data.pass2) {
+          errors.pass2.addError('pass must be same');
+        }
+        resolve();
+      }, 5000);
+    });
   },
   default: {
     pass1: undefined,
